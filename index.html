@@ -8,38 +8,52 @@
 </head>
 <body>
     <div id="app">
+        <div class="title-game">
+            <h1>{{ info.title }}</h1>
+            <p>{{ info.description }}</p>
+            <p> {{ info.challenge }}</p>
+        </div>
+        <div class="panel result" v-if="hasResult">
+            <div class="win" v-if="monsterLife == 0">
+                <p> Parabéns! Você conseguiu derrotar o monstro!!!</p>
+                <img :src="images.playerWin">
+            </div>
+            <div class="lose" v-else-if="playerLife == 0">
+                <p>Oh não!! Você perdeu!!</p>
+                 <img :src="images.monsterWin">
+
+                </div>
+        </div>
         <div class="panel scores">
             <div class="score">
                 <h1>Jogador</h1>
                 <div class="life-bar">
-                    <div class="life"></div>
+                    <div class="life" :class="{danger: playerLife < 20}" :style="{width: playerLife +'%'}"></div>
                 </div>
-                <div></div>
+                <div>{{ playerLife }}%</div>
             </div>
             <div class="score">
                 <h1>Monstro</h1>
+                <img :src="monsterLife > 20 ? images.monster : images.monsterDie">
                 <div class="life-bar">
-                    <div class="life"></div>
-                </div>
-                <div></div>
+                    <div class="life" :class="{danger: monsterLife < 20}" :style="{width: monsterLife +'%'}"></div>
+                </div> 
+                <div>{{ monsterLife }}%</div>
             </div>
         </div>
-        <div class="panel result">
-            <div class="win">Você ganhou!!! :)</div>
-            <div class="lose">Você perdeu! :(</div>
-        </div>
+        
         <div class="panel buttons">
-            <template>
-                <button class="btn attack">Ataque</button>
-                <button class="btn especial-attack">Ataque Especial</button>
-                <button class="btn heal">Curar</button>
-                <button class="btn give-up">Desistir</button>
+            <template v-if="running">
+                <button class="btn attack" @click="attack(false)">{{ actions.attack }}</button>
+                <button class="btn especial-attack" @click="attack(true)"> {{ actions.special }}</button>
+                <button class="btn heal" @click="healAndHurt"> {{ actions.heal }} </button>
+                <button class="btn give-up" @click="running = false"> {{ actions.giveUp}} </button>
             </template>
-            <button class="btn new-game">Iniciar Jogo</button>
+            <button class="btn new-game" v-else @click="startGame" >Iniciar Jogo</button>
         </div>
-        <div class="panel logs">
+        <div class="panel logs" v-if="logs.length">
             <ul>
-                <li></li>
+                <li class="log" :class="log.cls" v-for="log in logs">{{ log.text }}</li>
             </ul>
         </div>
     </div>
