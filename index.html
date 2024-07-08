@@ -27,6 +27,8 @@
         <div class="panel scores">
             <div class="score">
                 <h1>Jogador</h1>
+                <img :src="playerLife > 20 ? images.player : images.playerDie">
+
                 <div class="life-bar">
                     <div class="life" :class="{danger: playerLife < 20}" :style="{width: playerLife +'%'}"></div>
                 </div>

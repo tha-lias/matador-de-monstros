@@ -14,6 +14,8 @@ new Vue({
       },
       images: {
         monster: 'assets/images/img-monstro.png',
+        player: 'assets/images/player.png',
+        playerDie: 'assets/images/player-die.png',
         monsterDie: 'assets/images/img-monstro-die.png',
         monsterWin: 'https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Crying%20Face.png',
         playerWin: 'https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png'
