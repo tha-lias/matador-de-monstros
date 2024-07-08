@@ -115,6 +115,10 @@ html {
     justify-content: center;
 }
 
+.btn:hover{
+    scale: 1.1;
+}
+
 .btn {
     padding: 5px 10px;
     margin: 0px 10px;
